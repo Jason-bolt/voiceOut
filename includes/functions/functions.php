@@ -203,58 +203,58 @@ function post_general_complaint($subject, $body, $date_published, $username){
 
 
 // RETREIVING COMPLAINT POSTS
-function get_general_complaints(){
+function get_general_complaints($count){
 	global $connection;
 
-	$query = "SELECT * FROM general_posts";
+	$query = "SELECT * FROM general_posts LIMIT {$count}";
 	$results = mysqli_query($connection, $query);
 	return $results;
 }
 
-function get_cans_complaints(){
+function get_cans_complaints($count){
 	global $connection;
 
-	$query = "SELECT * FROM cans_posts";
+	$query = "SELECT * FROM cans_posts LIMIT {$count}";
 	$results = mysqli_query($connection, $query);
 	return $results;
 }
 
-function get_ces_complaints(){
+function get_ces_complaints($count){
 	global $connection;
 
-	$query = "SELECT * FROM ces_posts";
+	$query = "SELECT * FROM ces_posts LIMIT {$count}";
 	$results = mysqli_query($connection, $query);
 	return $results;
 }
 
-function get_chls_complaints(){
+function get_chls_complaints($count){
 	global $connection;
 
-	$query = "SELECT * FROM chls_posts";
+	$query = "SELECT * FROM chls_posts LIMIT {$count}";
 	$results = mysqli_query($connection, $query);
 	return $results;
 }
 
-function get_code_complaints(){
+function get_code_complaints($count){
 	global $connection;
 
-	$query = "SELECT * FROM code_posts";
+	$query = "SELECT * FROM code_posts LIMIT {$count}";
 	$results = mysqli_query($connection, $query);
 	return $results;
 }
 
-function get_cohas_complaints(){
+function get_cohas_complaints($count){
 	global $connection;
 
-	$query = "SELECT * FROM cohas_posts";
+	$query = "SELECT * FROM cohas_posts LIMIT {$count}";
 	$results = mysqli_query($connection, $query);
 	return $results;
 }
 
-function get_sgs_complaints(){
+function get_sgs_complaints($count){
 	global $connection;
 
-	$query = "SELECT * FROM sgs_posts";
+	$query = "SELECT * FROM sgs_posts LIMIT {$count}";
 	$results = mysqli_query($connection, $query);
 	return $results;
 }

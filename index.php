@@ -81,27 +81,43 @@
 
   <!-- MAIN CONTENT -->
 
-  <?php
+  <div id="complaints">
+    <?php
+      $complaintCount = 8;
+      $posts = get_general_complaints($complaintCount);
 
-  $posts = get_general_complaints();
-  while ($post = mysqli_fetch_assoc($posts)) {
-  ?>
+      // checking for posts
+      if (mysqli_num_rows($posts) == 0) {
+    ?>
+      <div>
+        <p>
+          No posts found
+        </p>
+      </div>
+    <?php
+      }else{
+        while ($post = mysqli_fetch_assoc($posts)) {
+    ?>
+      <div>
+        <h4><?php echo $post['general_post_subject']; ?></h4>
+          <p>
+            <?php echo $post['general_post_body']; ?>
+          </p>
+        <small style="color: #777;"><?php echo $post['general_post_date_published']; ?></small>
+      </div>
+      <!-- /.row -->
+      <hr />
+    <?php
+      }
+    ?>
+      <!-- Show more complaints -->
+      <button class="btn btn-primary pull-right">Show more complaints</button>
+    <?php
+    }
+    ?>
+  </div>
 
-    <div>
-      <h4><?php echo $post['general_post_subject']; ?></h4>
-      <p>
-        <?php echo $post['general_post_body']; ?>
-      </p>
-      <small style="color: #777;"><?php echo $post['general_post_date_published']; ?></small>
-    </div>
-    <!-- /.row -->
 
-    <hr />
-
-  <?php
-  }
-
-  ?>
 
 
   <!-- Pagination -->
@@ -140,3 +156,19 @@
 <div class="clr"></div>
 
 <?php include('includes/layouts/footer.php'); ?>
+
+<script type="text/javascript">
+  // jQuery code
+  $(document).ready(function() {
+    var complaintCount = 1;
+    $("button").click(function() {
+      complaintCount = complaintCount + 8;
+      $("#complaints").load(
+          "includes/raw_php/load_complaints_general.php",
+          {
+            complaintNewCount: complaintCount
+          }
+        );
+    });
+  });
+</script>
