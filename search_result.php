@@ -48,7 +48,10 @@
         while ($result = mysqli_fetch_assoc($results)) {
   ?>
         <div>
-          <h4><?php echo $result['cans_post_subject']; ?></h4>
+          <?php
+            $topic_arr = explode('_', $result['type']);
+          ?>
+          <h4><?php echo $result['cans_post_subject']; ?> <small>(<?php echo strtoupper($topic_arr[0]). " complaints"; ?>)</small></h4>
           <p>
             <?php echo $result['cans_post_body']; ?>
           </p>

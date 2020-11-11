@@ -42,7 +42,16 @@ $page = "faq";
   
   <!-- MAIN CONTENT -->
     <h3>How do I upload a complaint?</h3>
-    <p>After logging in, click the <q>Complaint</q> button on the navigation bar. A form will display, where you can fill in your complaint.</p>  
+    <p>
+      After logging in, click the <q>Complaint</q> button on the navigation bar. A form will display, where you can fill in your complaint.
+    </p>
+
+    <hr />
+
+    <h3>Can I edit my complaint after submitting?</h3>
+    <p>
+      No you can not! All submitted complaints can only be editted or manipulated by management.
+    </p>  
 
   <!-- ./MAIN CONTENT -->
 

@@ -88,6 +88,7 @@
 
       // checking for posts
       if (mysqli_num_rows($posts) == 0) {
+        $display = "none";
     ?>
       <div>
         <p>
@@ -96,6 +97,7 @@
       </div>
     <?php
       }else{
+        $display = "inherit";
         while ($post = mysqli_fetch_assoc($posts)) {
     ?>
       <div>
@@ -109,13 +111,21 @@
       <hr />
     <?php
       }
-    ?>
-      <!-- Show more complaints -->
-      <button class="btn btn-primary pull-right">Show more complaints</button>
-    <?php
     }
     ?>
-  </div>
+
+</div>
+
+<?php
+
+  if (mysqli_num_rows($posts)) {
+    # code...
+  }
+
+?>
+
+<!-- Show more complaints -->
+<button class="btn btn-primary pull-right" style="margin-bottom: 40px;">Show more complaints</button>
 
 
 
@@ -160,7 +170,7 @@
 <script type="text/javascript">
   // jQuery code
   $(document).ready(function() {
-    var complaintCount = 1;
+    var complaintCount = 8;
     $("button").click(function() {
       complaintCount = complaintCount + 8;
       $("#complaints").load(

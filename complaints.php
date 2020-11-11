@@ -70,68 +70,66 @@
 
   <div id="complaints">
     <!-- MAIN CONTENT -->
-  <?php
-    $complaintCount = 1;
-    switch ($college) {
-      case 'cans':
-        $posts = get_cans_complaints($complaintCount);
-        $key = 'cans';
-        break;
-      case 'ces':
-        $posts = get_ces_complaints($complaintCount);
-        $key = 'ces';
-        break;
-      case 'chls':
-        $posts = get_chls_complaints($complaintCount);
-        $key = 'chls';
-        break;
-      case 'code':
-        $posts = get_code_complaints($complaintCount);
-        $key = 'code';
-        break;
-      case 'cohas':
-        $posts = get_cohas_complaints($complaintCount);
-        $key = 'cohas';
-        break;
-      case 'sgs':
-        $posts = get_sgs_complaints($complaintCount);
-        $key = 'sgs';
-        break;
-    }
+    <?php
+      $complaintCount = 8;
+      switch ($college) {
+        case 'cans':
+          $posts = get_cans_complaints($complaintCount);
+          $key = 'cans';
+          break;
+        case 'ces':
+          $posts = get_ces_complaints($complaintCount);
+          $key = 'ces';
+          break;
+        case 'chls':
+          $posts = get_chls_complaints($complaintCount);
+          $key = 'chls';
+          break;
+        case 'code':
+          $posts = get_code_complaints($complaintCount);
+          $key = 'code';
+          break;
+        case 'cohas':
+          $posts = get_cohas_complaints($complaintCount);
+          $key = 'cohas';
+          break;
+        case 'sgs':
+          $posts = get_sgs_complaints($complaintCount);
+          $key = 'sgs';
+          break;
+      }
 
-    if (mysqli_num_rows($posts) == 0) { // No posts found
-  ?>
-    <div>
-      <p>
-        No posts found
-      </p>
-    </div>
-  <?php
-    }else{ // Posts found
-      while ($post = mysqli_fetch_assoc($posts)) {
+      if (mysqli_num_rows($posts) == 0) { // No posts found
     ?>
       <div>
-        <h4><?php echo $post[$key.'_post_subject']; ?></h4>
         <p>
-          <?php echo $post[$key.'_post_body']; ?>
+          No posts found
         </p>
-        <small style="color: #777;"><?php echo $post[$key.'_post_date_published']; ?></small>
       </div>
-      <!-- /.row -->
-
-      <hr />
-
     <?php
-      }
-    ?>
-    <!-- Show more complaints -->
-  <button class="btn btn-primary pull-right">Show more complaints</button>
-    <?php
-    }
+      }else{ // Posts found
+        while ($post = mysqli_fetch_assoc($posts)) {
+      ?>
+        <div>
+          <h4><?php echo $post[$key.'_post_subject']; ?></h4>
+          <p>
+            <?php echo $post[$key.'_post_body']; ?>
+          </p>
+          <small style="color: #777;"><?php echo $post[$key.'_post_date_published']; ?></small>
+        </div>
+        <!-- /.row -->
 
-    ?>
+        <hr />
+
+      <?php
+          }
+        }
+      ?>
   </div>
   <!-- End of complaints -->
+
+  <!-- Show more complaints -->
+  <button class="btn btn-primary pull-right" style="margin-bottom: 40px;">Show more complaints</button>
 
   
 
@@ -150,14 +148,14 @@
 <script type="text/javascript">
   // jQuery code
   $(document).ready(function() {
-    var complaintCount = 1;
+    var complaintCount = 8;
     $("button").click(function() {
-      complaintCount = complaintCount + 1;
+      complaintCount = complaintCount + 8;
       $("#complaints").load(
           "includes/raw_php/load_complaints_others.php",
           {
             complaintNewCount: complaintCount,
-            college: <?php echo $college; ?>
+            college: "<?php echo $college; ?>"
           }
         );
     });

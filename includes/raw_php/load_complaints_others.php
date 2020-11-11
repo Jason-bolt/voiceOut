@@ -56,9 +56,5 @@
 
   <?php
     }
-    ?>
-    <!-- Show more complaints -->
-  <button class="btn btn-primary pull-right">Show more complaints</button>
-    <?php
   }
   ?>

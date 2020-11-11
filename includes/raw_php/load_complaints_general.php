@@ -6,6 +6,7 @@
   $posts = get_general_complaints($complaintCount);
   // checking for posts
       if (mysqli_num_rows($posts) == 0) {
+        $display = "none";
     ?>
       <div>
         <p>
@@ -14,6 +15,7 @@
       </div>
     <?php
       }else{
+        $display = "inherit";
         while ($post = mysqli_fetch_assoc($posts)) {
     ?>
       <div>
@@ -27,9 +29,5 @@
       <hr />
     <?php
       }
-    ?>
-      <!-- Show more complaints -->
-      <button class="btn btn-primary pull-right">Show more complaints</button>
-    <?php
     }
     ?>
