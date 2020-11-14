@@ -81,51 +81,12 @@
 
   <!-- MAIN CONTENT -->
 
-  <div id="complaints">
-    <?php
-      $complaintCount = 8;
-      $posts = get_general_complaints($complaintCount);
+  <div id="complaints"></div>
 
-      // checking for posts
-      if (mysqli_num_rows($posts) == 0) {
-        $display = "none";
-    ?>
-      <div>
-        <p>
-          No posts found
-        </p>
-      </div>
-    <?php
-      }else{
-        $display = "inherit";
-        while ($post = mysqli_fetch_assoc($posts)) {
-    ?>
-      <div>
-        <h4><?php echo $post['general_post_subject']; ?></h4>
-          <p>
-            <?php echo $post['general_post_body']; ?>
-          </p>
-        <small style="color: #777;"><?php echo $post['general_post_date_published']; ?></small>
-      </div>
-      <!-- /.row -->
-      <hr />
-    <?php
-      }
-    }
-    ?>
 
-</div>
-
-<?php
-
-  if (mysqli_num_rows($posts)) {
-    # code...
-  }
-
-?>
 
 <!-- Show more complaints -->
-<button class="btn btn-primary pull-right" style="margin-bottom: 40px;">Show more complaints</button>
+<button class="btn btn-primary pull-right" style="margin-bottom: 40px;" id="button">Show more complaints</button>
 
 
 
@@ -168,17 +129,96 @@
 <?php include('includes/layouts/footer.php'); ?>
 
 <script type="text/javascript">
-  // jQuery code
-  $(document).ready(function() {
-    var complaintCount = 8;
-    $("button").click(function() {
-      complaintCount = complaintCount + 8;
-      $("#complaints").load(
-          "includes/raw_php/load_complaints_general.php",
-          {
-            complaintNewCount: complaintCount
+  // complaints count
+  var complaints_count = 8;
+
+  // DISPLAY WHEN PAGE OPENS
+
+  window.onload = function (){
+    var post_count;
+    // create Ajax variable
+    var xhr = new XMLHttpRequest();
+    // Open file
+    xhr.open('GET', 'includes/raw_php/load_complaints_general.php?complaints_count='+complaints_count, true);
+
+    // Load contents of file
+    xhr.onload = function(){
+      if (this.status == 200) {
+        // console.log(this.responseText);
+        var posts = JSON.parse(this.responseText);
+
+        var complaints = '';
+        
+        if (posts == "") {
+          complaints += "<div>" +
+          "<p> No posts found </p>" +
+          "</div>";
+          document.getElementById('button').style.display = "none";
+        }else{
+          for(var i in posts){
+            complaints += "<div>" +
+            "<h4>" + posts[i].general_post_subject + "</h4>" +
+            "<p>" + posts[i].general_post_body + "</p>" +
+            "<small style='color: #777;'>" + posts[i].general_post_date_published + "</small>" +
+            "<hr />" +
+            "</div>";
+            post_count = i;
+          } // for(var i in posts){
+        } // }else{
+
+          document.getElementById('complaints').innerHTML = complaints;
+          if (complaints_count > post_count + 1) {
+            document.getElementById('button').style.display = "none";
           }
-        );
-    });
-  });
+      } // if (this.status == 200) {
+    } // xhr.onload = function(){
+
+    // Display xhr file content
+    xhr.send();
+  } // window.onload = function (){
+
+
+    // BUTTON TO DISPLAY THE OTHER COMPLAINTS
+
+    document.getElementById('button').addEventListener('click', moreComplaints);
+
+    function moreComplaints(){
+      complaints_count = complaints_count + 8;
+
+      // Create new Ajax request
+      var xhr = new XMLHttpRequest();
+
+      // Open file
+      xhr.open('GET', 'includes/raw_php/load_complaints_general.php?complaints_count='+complaints_count, true);
+
+      // Load file
+      xhr.onload = function(){
+      if (this.status == 200) {
+        // console.log(this.responseText);
+        var posts = JSON.parse(this.responseText);
+
+        var complaints = '';
+        
+        for(var i in posts){
+          complaints += "<div>" +
+          "<h4>" + posts[i].general_post_subject + "</h4>" +
+          "<p>" + posts[i].general_post_body + "</p>" +
+          "<small style='color: #777;'>" + posts[i].general_post_date_published + "</small>" +
+          "<hr />" +
+          "</div>";
+          post_count = i;
+        
+        } // for(var i in posts){
+
+          document.getElementById('complaints').innerHTML = complaints;
+          if (complaints_count > parseInt(post_count) + 1) {
+            document.getElementById('button').style.display = "none";
+          }
+      } // if (this.status == 200) {
+    } // xhr.onload = function(){
+
+    // Display xhr file content
+    xhr.send();
+  }
+
 </script>

@@ -2,59 +2,40 @@
   include('../db/db.php');
   include('../functions/functions.php');
   
-  $complaintCount = $_POST['complaintNewCount'];
-  $college = $_POST['college'];
-
+  $complaintCount = $_GET['complaints_count'];
+  $college = $_GET['college'];
+  
   switch ($college) {
     case 'cans':
       $posts = get_cans_complaints($complaintCount);
-      $key = 'cans';
+      $post = mysqli_fetch_all($posts, MYSQLI_ASSOC);
+      echo json_encode($post);
       break;
     case 'ces':
       $posts = get_ces_complaints($complaintCount);
-      $key = 'ces';
+      $post = mysqli_fetch_all($posts, MYSQLI_ASSOC);
+      echo json_encode($post);
       break;
     case 'chls':
       $posts = get_chls_complaints($complaintCount);
-      $key = 'chls';
+      $post = mysqli_fetch_all($posts, MYSQLI_ASSOC);
+      echo json_encode($post);
       break;
     case 'code':
       $posts = get_code_complaints($complaintCount);
-      $key = 'code';
+      $post = mysqli_fetch_all($posts, MYSQLI_ASSOC);
+      echo json_encode($post);
       break;
     case 'cohas':
       $posts = get_cohas_complaints($complaintCount);
-      $key = 'cohas';
+      $post = mysqli_fetch_all($posts, MYSQLI_ASSOC);
+      echo json_encode($post);
       break;
     case 'sgs':
       $posts = get_sgs_complaints($complaintCount);
-      $key = 'sgs';
+      $post = mysqli_fetch_all($posts, MYSQLI_ASSOC);
+      echo json_encode($post);
       break;
   }
 
-  if (mysqli_num_rows($posts) == 0) { // No posts found
-?>
-  <div>
-    <p>
-      No posts found
-    </p>
-  </div>
-<?php
-  }else{ // Posts found
-    while ($post = mysqli_fetch_assoc($posts)) {
-  ?>
-    <div>
-      <h4><?php echo $post[$key.'_post_subject']; ?></h4>
-      <p>
-        <?php echo $post[$key.'_post_body']; ?>
-      </p>
-      <small style="color: #777;"><?php echo $post[$key.'_post_date_published']; ?></small>
-    </div>
-    <!-- /.row -->
-
-    <hr />
-
-  <?php
-    }
-  }
   ?>
