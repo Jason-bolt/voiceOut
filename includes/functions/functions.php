@@ -45,6 +45,18 @@ function user_logged_in(){
 }
 
 
+// ADMIN LOGGED IN
+function confirm_commander_logged_in(){
+	if (!commander_logged_in()) {
+		redirect_to("command_login.php");
+	}
+}
+
+function commander_logged_in(){
+	return isset($_SESSION["commander_id"]);
+}
+
+
 // PASSWORD FUNCTIONS
 function password_encrypt($password){
 	$hash_format = "$2y$10$"; // Tells PHP to use Blowfish with "cost" of 10
@@ -100,6 +112,38 @@ function get_user_by_username($username){
 
 	$query = "SELECT * FROM users ";
 	$query .= "WHERE username = '$username' LIMIT 1";
+	$results = mysqli_query($connection, $query);
+	if ($result = mysqli_fetch_assoc($results)) {
+		return $result;
+	}else{
+		return null;
+	}
+}
+
+
+// **************** COMMAND *****************
+function attempt_commander_login($username, $password){
+	$commander = get_commander_by_username($username);
+	if ($commander) {
+		// Found commander, now check passord
+		if (password_check($password, $commander["commander_password"])) {
+			// Password matches
+			return $commander;
+		}else{
+			// Password was not match
+			return false;
+		}
+	}else{
+		// Admin not found
+		return false;
+	}
+}
+
+function get_commander_by_username($username){
+	global $connection;
+
+	$query = "SELECT * FROM commanders ";
+	$query .= "WHERE commander_name = '$username' LIMIT 1";
 	$results = mysqli_query($connection, $query);
 	if ($result = mysqli_fetch_assoc($results)) {
 		return $result;
