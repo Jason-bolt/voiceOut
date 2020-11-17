@@ -250,7 +250,7 @@ function post_general_complaint($subject, $body, $date_published, $username){
 function get_general_complaints($count){
 	global $connection;
 
-	$query = "SELECT * FROM general_posts LIMIT {$count}";
+	$query = "SELECT * FROM general_posts ORDER BY general_post_id DESC LIMIT {$count}";
 	$results = mysqli_query($connection, $query);
 	return $results;
 }
@@ -258,7 +258,7 @@ function get_general_complaints($count){
 function get_cans_complaints($count){
 	global $connection;
 
-	$query = "SELECT * FROM cans_posts LIMIT {$count}";
+	$query = "SELECT * FROM cans_posts ORDER BY cans_post_id DESC LIMIT {$count}";
 	$results = mysqli_query($connection, $query);
 	return $results;
 }
@@ -266,7 +266,7 @@ function get_cans_complaints($count){
 function get_ces_complaints($count){
 	global $connection;
 
-	$query = "SELECT * FROM ces_posts LIMIT {$count}";
+	$query = "SELECT * FROM ces_posts ORDER BY ces_post_id DESC LIMIT {$count}";
 	$results = mysqli_query($connection, $query);
 	return $results;
 }
@@ -274,7 +274,7 @@ function get_ces_complaints($count){
 function get_chls_complaints($count){
 	global $connection;
 
-	$query = "SELECT * FROM chls_posts LIMIT {$count}";
+	$query = "SELECT * FROM chls_posts ORDER BY chls_post_id DESC LIMIT {$count}";
 	$results = mysqli_query($connection, $query);
 	return $results;
 }
@@ -282,7 +282,7 @@ function get_chls_complaints($count){
 function get_code_complaints($count){
 	global $connection;
 
-	$query = "SELECT * FROM code_posts LIMIT {$count}";
+	$query = "SELECT * FROM code_posts ORDER BY code_post_id DESC LIMIT {$count}";
 	$results = mysqli_query($connection, $query);
 	return $results;
 }
@@ -290,7 +290,7 @@ function get_code_complaints($count){
 function get_cohas_complaints($count){
 	global $connection;
 
-	$query = "SELECT * FROM cohas_posts LIMIT {$count}";
+	$query = "SELECT * FROM cohas_posts ORDER BY cohas_post_id DESC LIMIT {$count}";
 	$results = mysqli_query($connection, $query);
 	return $results;
 }
@@ -298,7 +298,7 @@ function get_cohas_complaints($count){
 function get_sgs_complaints($count){
 	global $connection;
 
-	$query = "SELECT * FROM sgs_posts LIMIT {$count}";
+	$query = "SELECT * FROM sgs_posts ORDER BY sgs_post_id DESC LIMIT {$count}";
 	$results = mysqli_query($connection, $query);
 	return $results;
 }
@@ -322,6 +322,16 @@ function search_results($search_query){
 
 	$results = mysqli_query($connection, $query);
 	query_check($results);
+	return $results;
+}
+
+
+// GET ALL ADMINS
+function get_commanders(){
+	global $connection;
+
+	$query = "SELECT commander_id, commander_name FROM commanders";
+	$results = mysqli_query($connection, $query);
 	return $results;
 }
 	
