@@ -1,8 +1,8 @@
 
   <!-- Footer -->
-  <footer class="py-5 bg-dark">
+  <footer class="py-5 bg-light">
     <div class="container">
-      <p class="m-0 text-center text-white">Copyright &copy; Voice Out 2020</p>
+      <p class="m-0 text-center text-black">Copyright &copy; Voice Out 2021</p>
     </div>
     <!-- /.container -->
   </footer>

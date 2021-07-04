@@ -1,4 +1,4 @@
-<section class="top-bar">
+<section class="top-bar mt-3">
   <div class="container">
     <div class="top">
       <!-- Contact Info -->
@@ -15,7 +15,7 @@
           <div class="col-auto">
             <input class="form-control mb-2" id="search" type="text" name="search"placeholder="Search by subject...">
           </div>
-          <div class="col-auto">
+          <div class="col-auto form-group">
             <button style="background-color: #3f009b; color: #fff;" type="submit" class="btn mb-2" name="search-submit" value="submit">Search</button>
           </div>
         </form>

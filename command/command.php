@@ -124,6 +124,8 @@
             complaints += "<div>" +
             "<h4>" + posts[i][key+'_post_subject'] + "</h4>" +
             "<p>" + posts[i][key+'_post_body'] + "</p>" +
+            "<small style='color: #777;'>Posted by " + posts[i]['username'] + "</small>" +
+            "<br />" +
             "<small style='color: #777;'>" + posts[i][key+'_post_date_published'] + "</small>" +
             "<br />" +
             "<a href='../includes/raw_php/command_delete_complaint.php?id=" + posts[i][key+'_post_id'] + "&key=" + key + "' class='btn btn-danger py-0' onclick=\"return confirm('You are about to delete this complaint!')\">Delete</a>" +

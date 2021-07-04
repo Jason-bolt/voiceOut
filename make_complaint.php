@@ -78,7 +78,7 @@ $page = "complaint";
   </div>
   <ul>
     <li>Your index number will be attached to your post so becareful the content.</li>
-    <li>Any complaint committed can only be editted or removed by management.</li>
+    <li>Any complaint committed can only be removed by management.</li>
   </ul>
 </div>
 
